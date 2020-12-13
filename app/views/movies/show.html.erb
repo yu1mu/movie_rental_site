@@ -1,0 +1,84 @@
+<style>
+  .pagination .page.current {
+    background-color: transparent !important;
+    color: rgb(7, 3, 130) !important;
+    padding: 0 8px 0 8px !important;
+  }
+  .post-body p img{
+    width: 100%;
+  }
+  .card-img-top {
+    max-height: 400px;
+    overflow: hidden;
+  }
+</style>
+
+<div class="container">
+  <div class="text-right mt-3">
+    <%= link_to "Back To List", movies_path, class: "color-primary mr-2" %>
+  </div>
+  <div class="row mt-3">
+    <div class="col-md-8 mb-3">
+      <img class="w-100 card-img-top" src="<%=@movie.image%>">
+      <div class="card">
+        <div class="card-body">
+          <h4><%= @movie.movie_name %></h4>
+          <hr class="my-3">
+          <div class="post-body">
+            <p><%= @movie.movie_description rescue "" %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="mb-3">
+        <div class="card">
+          <div class="card-body" style="min-height:130px;">
+            <h5><%= @movie.movie_name %></h5>
+            <hr/>
+            <div class="small text-muted">
+              <div class="mb-3">
+                <span class="text-primary mb-2">Category</span><br/>
+                <span><%= @movie.movie_type %></span>
+              </div>
+              <div class="mb-3">
+                <span class="text-primary mb-2">Rating</span><br/>
+                <span><%= @movie.rating || 0 %> score</span>
+              </div>
+              <div class="mb-3">
+                <span class="text-primary mb-2">Actor</span><br/>
+                <% @movie.actors.each do |actor| %>
+                  <span><%= actor.actor_name %> (<%= actor.age %>) - <%= actor.actor_gender %></span><br/>
+                <% end %>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <% queue_label = current_user.moviequeues.find_by(movie_id: @movie.id).present? ? "Queue out" : "Queue in" %>
+            <%= link_to queue_label, toggle_like_movie_path(@movie), method: :PUT, class: "btn btn-primary color-primary mr-2 float-right" %>
+            <% order_label = @movie.rented?(current_user) ? "Return" : "Rent" %>
+            <%= link_to order_label, movie_path(@movie), method: :PUT, class: "btn btn-primary color-primary mr-2 float-right" %>
+          </div>
+        </div>
+      </div>
+      <% if @movie.rented? current_user %>
+        <div class="card w-100">
+          <div class="card-body">
+            <h5 class="card-title">Give Stars</h5>
+            <% if (rating = Rating.find_by(user_id: current_user.id, movie_id: @movie.id)).present? %>
+              You give <%= rating.rating %> stars to this movie!
+            <% else %>
+              <%= form_for Rating.new do |f| %>
+                <p class="card-text">Give a start to your movies</p>
+                <%= f.hidden_field :user_id, value: current_user.id %>
+                <%= f.hidden_field :movie_id, value: @movie.id %>
+                <%= f.number_field :rating, min: 0, max: 5, class: "w-100" %>
+                <%= f.submit "save", class: "btn btn-primary float-right mt-2" %>
+              <% end %>
+            <% end %>  
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

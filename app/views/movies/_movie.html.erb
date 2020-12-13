@@ -1,0 +1,48 @@
+<style>
+  .movie-card {
+    border: none;
+    margin-bottom: 20px;
+  }
+  .movie-card-img {
+    width: 100%;
+    height: 100%;
+    max-height: 200px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-\repeat;
+  }
+  img {
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)) !important;
+  }
+  .image-gradient{
+    position:relative;
+    display:inline-block;
+  }
+  .image-gradient:after {
+    content:'';
+    position:absolute;
+    left:0; top:0;
+    width:100%; height:100%;
+    display:inline-block;
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3))
+  }
+</style>
+
+<div class="col-md-4 mb-3 px-3">
+  <div class="card movie-card">
+    <div class="image-gradient">
+        <% image_url = movie.image.present? ? movie.image.url : "image/movie_1.jpg" %>
+      <img class="movie-card-img card-img-top" src="<%=movie.image%>">
+    </div>
+    <div class="card-body px-2">
+      <%= link_to movie_path(movie.id), class: "text-dark" do %>
+        <h5 class="font-weight-bold"><%= movie.movie_name %></h5>
+      <% end %>
+      <p class="card-text"><%= simple_format movie.movie_description.truncate(120) %></p>
+      <div class="row justify-content-between small text-muted mt-2 px-3">
+        <div class="color-primary"><%= movie.movie_type %></div>
+        <div class="color-gray"><%= pretty_date movie.created_at %></div>
+      </div>
+    </div>
+  </div>
+</div>

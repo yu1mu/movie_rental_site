@@ -1,0 +1,42 @@
+<style>
+  .font-nav {
+    color: rgb(250, 250, 230) !important;
+  }
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light pl-4 py-3" style="background-color: rgb(31, 16, 77) !important;">
+  <a class="navbar-brand font-weight-bold font-nav" href="/">Cinevery</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+    <ul class="navbar-nav">
+      <li class="nav-item active mr-3">
+        <a class="nav-link font-nav" href="/">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <% if current_user %>
+        <li class="nav-item mr-3">
+          <%= link_to "Movie Queue", queue_path, class: "nav-link font-nav" %>
+        </li>
+        <li class="nav-item mr-3">
+          <%= link_to "My Orders", order_path, class: "nav-link font-nav" %>
+        </li>
+        <li class="nav-item mr-3">
+            <%= link_to "My Info" , mypage_path, class: "nav-link font-nav" %>
+        </li>
+        <li class="nav-item mr-3">
+          <%= link_to "logout", destroy_user_session_path, method: :delete, class: "nav-link font-nav" %>
+        </li>
+      <% else %>
+        <li class="nav-item mr-3">
+          <%= link_to "Login", new_user_session_path, class: "nav-link font-nav" %>
+        </li>
+        <li class="nav-item mr-3">
+          <%= link_to "Sign up", new_user_registration_path, class: "nav-link font-nav" %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</nav>
+

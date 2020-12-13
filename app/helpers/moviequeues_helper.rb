@@ -1,0 +1,2 @@
+module MoviequeuesHelper
+end

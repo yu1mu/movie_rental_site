@@ -1,0 +1,52 @@
+<style>
+  .container {
+    background-color: white;
+    max-width: 1240px !important;
+  }
+  .pagination .page.current {
+    background-color: transparent !important;
+    color: rgb(7, 3, 130) !important;
+    padding: 0 8px 0 8px !important;
+  }
+  .banner{
+    overflow: hidden;
+    background-size: 100% 100% !important;
+    background-repeat: no-repeat;
+    width: 100%;
+    max-height: 350px;
+  }
+</style>
+
+<div class='container my-4'>
+  <form class="pt-3" method="get" action="movies/search">
+    <div class="input-group mb-1">
+      <input type="text" class="form-control" placeholder="Search movies or movie types..." aria-label="search" aria-describedby="button-addon2" name="q">
+      <div class="input-group-append">
+        <button class="btn btn-outline-primary" type="submit" id="button-addon2">search</button>
+      </div>
+    </div>
+  </form>
+  <form class="pt" method="get" action="actors/search">
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" placeholder="Search actors..." aria-label="search" aria-describedby="button-addon2" name="q">
+      <div class="input-group-append">
+        <button class="btn btn-outline-primary" type="submit" id="button-addon2">search</button>
+      </div>
+    </div>
+  </form>
+  <p></p>
+  
+  
+  <div class="row justify-content-between font-weight-bold mt-5 px-4">
+    <h4>Movie List</h4>
+    <div><%= @movies.count %> pieces</div>
+  </div>
+  <hr class="mt-1 mb-3 color-gray"/>
+  <div class="row justify-content-space-around">
+    <% @movies.each do |movie| %>
+      <%= render movie %>
+    <% end %>
+  </div>
+  <div class="pagination justify-content-center mt-3">
+  </div>
+</div>
