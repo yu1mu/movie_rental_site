@@ -42,10 +42,6 @@
                 <span><%= @movie.movie_type %></span>
               </div>
               <div class="mb-3">
-                <span class="text-primary mb-2">Rating</span><br/>
-                <span><%= @movie.rating || 0 %> score</span>
-              </div>
-              <div class="mb-3">
                 <span class="text-primary mb-2">Actor</span><br/>
                 <% @movie.actors.each do |actor| %>
                   <span><%= actor.actor_name %> (<%= actor.age %>) - <%= actor.actor_gender %></span><br/>
