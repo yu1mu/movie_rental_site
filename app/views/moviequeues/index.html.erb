@@ -21,7 +21,7 @@
   
   <div class="row justify-content-between font-weight-bold mt-5 px-4">
     <h4>Movie queue</h4>
-    <div><%= @moviequeues.where(user_id: current_user.id).count%> pieces</div>
+    <div><%= @moviequeues.count%> pieces</div>
   </div>
   <hr class="mt-1 mb-3 color-gray"/>
   <div class="row justify-content-space-around">
