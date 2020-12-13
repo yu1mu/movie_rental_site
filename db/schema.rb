@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_12_202020) do
+ActiveRecord::Schema.define(version: 2020_12_13_090717) do
 
   create_table "actors", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "actor_name"
@@ -43,7 +43,6 @@ ActiveRecord::Schema.define(version: 2020_12_12_202020) do
     t.text "movie_description"
     t.string "movie_type"
     t.decimal "rating", precision: 10
-    t.string "number_of_copies"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "image"
